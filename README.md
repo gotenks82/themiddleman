@@ -50,8 +50,8 @@ Once the users see the notification and "accept" the trade, they can start the c
 
 ## Tech Stack
 For this project I plan to use:
-* Kotlin as base language
-* Micronaut as full-stack framework
-* Akka as actor-model framework
-* Swagger for api documentation
-* this project: https://github.com/gotenks82/alexslist will integrate with the middleman service
+* [Kotlin](https://kotlinlang.org/) as base language
+* [Micronaut](http://micronaut.io/) as full-stack framework
+* [Akka](https://akka.io/) as actor-model framework
+* [Swagger](https://swagger.io/) for api documentation
+* this project: [alexslist](https://github.com/gotenks82/alexslist) will integrate with the middleman service
