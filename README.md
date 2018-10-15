@@ -54,3 +54,4 @@ For this project I plan to use:
 * Micronaut as full-stack framework
 * Akka as actor-model framework
 * Swagger for api documentation
+* this project: https://github.com/gotenks82/alexslist will integrate with the middleman service
