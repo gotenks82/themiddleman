@@ -4,11 +4,9 @@ import com.eurohack.middleman.models.Interest
 import com.eurohack.middleman.services.MiddleManService
 import io.micronaut.http.HttpResponse.accepted
 import io.micronaut.http.HttpResponse.ok
+import io.micronaut.http.MediaType
 import io.micronaut.http.MutableHttpResponse
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 import javax.inject.Inject
 
 @Controller("/user")
@@ -23,6 +21,7 @@ class UserController @Inject constructor(
     }
 
     @Get("/{id}/notifications")
+    @Produces(MediaType.APPLICATION_JSON)
     fun getNotifications(id: String) : MutableHttpResponse<Any?> = ok(middleManService.getNotifications(id))
 
 }
