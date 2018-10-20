@@ -1,6 +1,7 @@
 package com.eurohack.middleman.controllers
 
 import com.eurohack.middleman.models.Interest
+import com.eurohack.middleman.models.TradeOpportunityStatus
 import com.eurohack.middleman.services.MiddleManService
 import io.micronaut.http.HttpResponse.accepted
 import io.micronaut.http.HttpResponse.ok
@@ -27,5 +28,8 @@ class UserController @Inject constructor(
     @Get("/{id}/trades")
     @Produces(MediaType.APPLICATION_JSON)
     fun getTrades(id: String) : MutableHttpResponse<Any?> = ok(middleManService.getTradesByUser(id))
+
+    @Post("/{id}/trades/{tradeId}/status/{status}")
+    fun updateStatus(id: String, tradeId: String, status: TradeOpportunityStatus) = ok(middleManService.updateStatus(id, tradeId, status))
 
 }

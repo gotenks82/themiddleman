@@ -1,10 +1,7 @@
 package com.eurohack.middleman.actors
 
 import akka.actor.UntypedAbstractActor
-import akka.pattern.PatternsCS.ask
-import akka.util.Timeout
 import com.eurohack.middleman.models.*
-import java.util.concurrent.TimeUnit
 
 class UserActor(val userId: String) : UntypedAbstractActor() {
     val user = User(userId)
@@ -14,8 +11,11 @@ class UserActor(val userId: String) : UntypedAbstractActor() {
         when (msg) {
             is Interest -> addInterest(msg)
             is TradeOpportunity -> handleTrade(msg)
+            is TradeStatusChange -> handleStatusChange(msg)
             AskableMessages.GET_NOTIFICATIONS -> sender.tell(getNotifications(), self)
             AskableMessages.GET_TRADES -> sender.tell(user.tradeOpportunities.keys.toList(), self)
+            StatusMessages.TRADE_ACCEPTED -> user.notifications.add("Your Trading opportunity was ACCEPTED!")
+            StatusMessages.TRADE_REJECTED -> user.notifications.add("Your Trading opportunity was REJECTED!")
             else -> println("Unknown message ${msg}")
         }
     }
@@ -79,5 +79,15 @@ class UserActor(val userId: String) : UntypedAbstractActor() {
         val notifications = mutableListOf<String>().apply { addAll(user.notifications) }
         user.notifications.clear()
         return notifications
+    }
+
+    fun handleStatusChange(msg: TradeStatusChange) {
+        if (!user.tradeOpportunities.keys.contains(msg.tradeId)) return
+
+        user.tradeOpportunities[msg.tradeId] = msg.status
+        manager.tell(MessageToTradeActor(
+                tradeId = msg.tradeId,
+                message = msg
+        ), self)
     }
 }

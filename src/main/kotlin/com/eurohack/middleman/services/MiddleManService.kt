@@ -42,4 +42,11 @@ class MiddleManService {
 
         return futures.map { (it.get() as TradeOpportunity).toSummary(userId) }
     }
+
+    fun updateStatus(userId: String, tradeId: String, status: TradeOpportunityStatus) {
+        middleManManager.tell(MessageToUserActor(
+                userId = userId,
+                message = TradeStatusChange(userId, tradeId, status)
+        ), null)
+    }
 }

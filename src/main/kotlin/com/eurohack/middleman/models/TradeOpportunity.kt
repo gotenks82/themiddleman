@@ -23,6 +23,9 @@ class TradeOpportunity(
         else -> PENDING
     }
 
+    fun isAccepted(): Boolean = getStatus() == ACCEPTED
+    fun isRejected(): Boolean = getStatus() == REJECTED
+
     fun isUserInvolved(user: String) = steps.any { it.userId == user }
 
     fun wasReceivedBy(user: String) = steps.any { it.interest.itemUserid == user }
