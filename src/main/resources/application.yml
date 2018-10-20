@@ -1,0 +1,13 @@
+micronaut:
+    application:
+        name: themiddleman
+    server:
+        port: 8085
+    router:
+        static-resources:
+            swagger:
+                paths: classpath:META-INF/swagger
+                mapping: /swagger/**
+            swagger-ui:
+                paths: classpath:public
+                mapping: /docs/**

@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script src="//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+    </head>
+    <body>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                SwaggerUIBundle({
+                    url: "http://localhost:8085/swagger/swagger.yml",
+                    dom_id: '#swagger-ui'
+                });
+            }, false);
+        </script>
+        <div id="swagger-ui"></div>
+    </body>
+</html>

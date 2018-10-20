@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.eurohack
+---
+testFramework: spek
+sourceLanguage: kotlin
