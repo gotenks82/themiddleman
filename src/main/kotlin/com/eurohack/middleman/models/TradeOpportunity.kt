@@ -1,6 +1,7 @@
 package com.eurohack.middleman.models
 
 import com.eurohack.middleman.models.TradeOpportunityStatus.*
+import com.fasterxml.jackson.annotation.JsonInclude
 import java.util.*
 
 class TradeOpportunity(
@@ -14,6 +15,7 @@ class TradeOpportunity(
 
     fun isLimitExceeded(): Boolean = maxUsers < steps.size
 
+    @JsonInclude
     fun getStatus(): TradeOpportunityStatus = when {
         users.any { it.value == REJECTED } -> REJECTED
         users.all { it.value == ACCEPTED } -> ACCEPTED
@@ -50,6 +52,22 @@ class TradeOpportunity(
             clear()
             addAll(tradeOpportunity.messages)
         }
+    }
+
+    fun toSummary(userId: String) : TradeSummary {
+        val selling = requireNotNull(steps.find { it.interest.itemUserid == userId })
+        val buying = requireNotNull(steps.find { it.userId == userId })
+
+        return TradeSummary(
+                id= id,
+                nSteps = steps.count(),
+                userStatus = users[userId] ?: PENDING,
+                tradeStatus = getStatus(),
+                nMessages = messages.count(),
+                priceDelta = selling.interest.itemPrice - buying.interest.itemPrice,
+                selling = selling.interest,
+                buying = buying.interest
+        )
     }
 }
 

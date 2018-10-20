@@ -1,6 +1,7 @@
 package com.eurohack.middleman.actors
 
 import akka.actor.UntypedAbstractActor
+import com.eurohack.middleman.models.AskableMessages
 import com.eurohack.middleman.models.MessageToUserActor
 import com.eurohack.middleman.models.TradeOpportunity
 
@@ -11,6 +12,7 @@ class TradeActor(val tradeId: String) : UntypedAbstractActor() {
     override fun onReceive(msg: Any?) {
         when (msg) {
             is TradeOpportunity -> handleTrade(msg)
+            AskableMessages.GET_TRADE -> sender.tell(trade, self)
             else -> println("Trade ${trade.id} received message $msg")
         }
     }

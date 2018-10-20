@@ -1,7 +1,10 @@
 package com.eurohack.middleman.actors
 
 import akka.actor.UntypedAbstractActor
+import akka.pattern.PatternsCS.ask
+import akka.util.Timeout
 import com.eurohack.middleman.models.*
+import java.util.concurrent.TimeUnit
 
 class UserActor(val userId: String) : UntypedAbstractActor() {
     val user = User(userId)
@@ -12,6 +15,7 @@ class UserActor(val userId: String) : UntypedAbstractActor() {
             is Interest -> addInterest(msg)
             is TradeOpportunity -> handleTrade(msg)
             AskableMessages.GET_NOTIFICATIONS -> sender.tell(getNotifications(), self)
+            AskableMessages.GET_TRADES -> sender.tell(user.tradeOpportunities.keys.toList(), self)
             else -> println("Unknown message ${msg}")
         }
     }
@@ -76,5 +80,4 @@ class UserActor(val userId: String) : UntypedAbstractActor() {
         user.notifications.clear()
         return notifications
     }
-
 }

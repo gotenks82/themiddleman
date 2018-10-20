@@ -24,4 +24,8 @@ class UserController @Inject constructor(
     @Produces(MediaType.APPLICATION_JSON)
     fun getNotifications(id: String) : MutableHttpResponse<Any?> = ok(middleManService.getNotifications(id))
 
+    @Get("/{id}/trades")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getTrades(id: String) : MutableHttpResponse<Any?> = ok(middleManService.getTradesByUser(id))
+
 }
