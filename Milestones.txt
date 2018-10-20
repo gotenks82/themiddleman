@@ -1,27 +1,27 @@
 Milestones
 
 1) 
-backend: 
+backend: DONE
 api accepts interests
 calculates trades
 returns notifications
 
-frontend:
+frontend: DONE
 sends interests
 checks for notifications
 shows notifications
 
 2)
-backend:
+backend: DONE
 api returns list of trades
 api returns details of single trade
 
-frontend:
+frontend: DONE
 shows list of trades
 shows single trade
 
 3)
-backend:
+backend: DONE
 api allows accepting/rejecting trade
 
 frontend:
