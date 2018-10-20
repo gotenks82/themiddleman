@@ -1,0 +1,45 @@
+Milestones
+
+1) 
+backend: 
+api accepts interests
+calculates trades
+returns notifications
+
+frontend:
+sends interests
+checks for notifications
+shows notifications
+
+2)
+backend:
+api returns list of trades
+api returns details of single trade
+
+frontend:
+shows list of trades
+shows single trade
+
+3)
+backend:
+api allows accepting/rejecting trade
+
+frontend:
+api shows functionality to accept/reject
+
+4)
+backend:
+api accepts chat messages for a given trade
+
+frontend:
+allows users to send messages
+shows all messages
+
+5)
+backend:
+api accepts and returns user configuration
+updates all trades according to the config
+
+frontend:
+shows user configuration
+allows edit of user configuration

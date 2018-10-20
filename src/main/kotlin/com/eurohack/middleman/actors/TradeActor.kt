@@ -1,12 +1,27 @@
 package com.eurohack.middleman.actors
 
 import akka.actor.UntypedAbstractActor
+import com.eurohack.middleman.models.MessageToUserActor
 import com.eurohack.middleman.models.TradeOpportunity
 
 class TradeActor(val tradeId: String) : UntypedAbstractActor() {
-    val trade = TradeOpportunity(tradeId)
+    val trade = TradeOpportunity(id = tradeId)
+    val manager = context.parent
 
     override fun onReceive(msg: Any?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when (msg) {
+            is TradeOpportunity -> handleTrade(msg)
+            else -> println("Trade ${trade.id} received message $msg")
+        }
+    }
+
+    fun handleTrade(tradeOpportunity: TradeOpportunity) {
+        trade.copyFrom(tradeOpportunity)
+        trade.users.keys.filter { it != trade.rootUserId }.forEach { user ->
+            manager.tell(MessageToUserActor(
+                    userId = user,
+                    message = trade
+            ), self)
+        }
     }
 }

@@ -13,22 +13,22 @@ class MiddleManActor : UntypedAbstractActor() {
 
     override fun onReceive(msg: Any?) {
         when(msg) {
-            is MessageToUserActor -> users[msg.userId]?.tell(msg.message, sender())
-            is MessageToTradeActor -> trades[msg.tradeId]?.tell(msg.message, sender())
+            is MessageToUserActor -> getUserFor(msg.userId).tell(msg.message, sender())
+            is MessageToTradeActor -> getTradeFor(msg.tradeId).tell(msg.message, sender())
             else -> println("Unknown message ${msg}")
         }
     }
 
     fun getUserFor(id: String) : ActorRef {
         if (!users.containsKey(id)) {
-            users[id] = context.actorOf(Props.create(UserActor::class.java, id))
+            users[id] = context.actorOf(Props.create(UserActor::class.java, id), id)
         }
         return requireNotNull(users[id])
     }
 
     fun getTradeFor(id: String) : ActorRef {
         if (!trades.containsKey(id)) {
-            trades[id] = context.actorOf(Props.create(TradeActor::class.java, id))
+            trades[id] = context.actorOf(Props.create(TradeActor::class.java, id), id)
         }
         return requireNotNull(trades[id])
     }
