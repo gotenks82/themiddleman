@@ -55,3 +55,4 @@ For this project I plan to use:
 * [Akka](https://akka.io/) as actor-model framework
 * [Swagger](https://swagger.io/) for api documentation
 * this project: [alexslist](https://github.com/gotenks82/alexslist) will integrate with the middleman service
+  the integration was done on the branch: "feature/middleman_integration" 
