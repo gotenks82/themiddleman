@@ -32,4 +32,6 @@ class UserController @Inject constructor(
     @Post("/{id}/trades/{tradeId}/status/{status}")
     fun updateStatus(id: String, tradeId: String, status: TradeOpportunityStatus) = ok(middleManService.updateStatus(id, tradeId, status))
 
+    @Post("/{id}/trades/{tradeId}/messages")
+    fun postMessage(id: String, tradeId: String, content: String) : MutableHttpResponse<Any?> = ok(middleManService.postMessage(id, tradeId, content))
 }

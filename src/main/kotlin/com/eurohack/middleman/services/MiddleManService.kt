@@ -49,4 +49,17 @@ class MiddleManService {
                 message = TradeStatusChange(userId, tradeId, status)
         ), null)
     }
+
+    fun postMessage(userId: String, tradeId: String, content: String) {
+        middleManManager.tell(MessageToTradeActor(
+                tradeId = tradeId,
+                message = ChatMessage(from= userId, content = content)
+        ), null)
+    }
+
+    fun getMessages(tradeId: String) : List<ChatMessage> = ask(middleManManager,
+            MessageToTradeActor(
+                tradeId = tradeId,
+                message = GET_MESSAGES
+            ), askTimeout).toCompletableFuture().get() as List<ChatMessage>
 }

@@ -8,7 +8,7 @@ class TradeOpportunity(
         val id: String = UUID.randomUUID().toString(),
         val steps: MutableList<TradeStep> = mutableListOf(),
         val users: MutableMap<String, TradeOpportunityStatus> = mutableMapOf(),
-        val messages: MutableList<Message> = mutableListOf()
+        val messages: MutableList<ChatMessage> = mutableListOf()
 ) {
     var rootUserId: String = ""
     var maxUsers = 10

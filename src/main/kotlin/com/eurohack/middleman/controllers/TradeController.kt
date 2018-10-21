@@ -18,4 +18,8 @@ class TradeController @Inject constructor(
     @Produces(MediaType.APPLICATION_JSON)
     fun getTrade(id: String) : MutableHttpResponse<Any?> = ok(middleManService.getTrade(id))
 
+    @Get("/{id}/messages")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getMessagesForTrade(id: String) : MutableHttpResponse<Any?>  = ok(middleManService.getMessages(id))
+
 }

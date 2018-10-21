@@ -11,7 +11,9 @@ class TradeActor(val tradeId: String) : UntypedAbstractActor() {
         when (msg) {
             is TradeOpportunity -> handleTrade(msg)
             is TradeStatusChange -> handleStatusChange(msg)
+            is ChatMessage -> addChatMessage(msg)
             AskableMessages.GET_TRADE -> sender.tell(trade, self)
+            AskableMessages.GET_MESSAGES -> sender.tell(trade.messages, self)
             else -> println("Trade ${trade.id} received message $msg")
         }
     }
@@ -45,5 +47,9 @@ class TradeActor(val tradeId: String) : UntypedAbstractActor() {
                 ), self)
             }
         }
+    }
+
+    fun addChatMessage(msg: ChatMessage) {
+        trade.messages.add(msg)
     }
 }

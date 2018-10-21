@@ -11,3 +11,7 @@ micronaut:
             swagger-ui:
                 paths: classpath:public
                 mapping: /docs/**
+jackson:
+    serialization:
+        indentOutput: true
+        writeDatesAsTimestamps: false
