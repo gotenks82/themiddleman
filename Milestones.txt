@@ -28,10 +28,10 @@ frontend: DONE
 api shows functionality to accept/reject
 
 4)
-backend:
+backend: DONE
 api accepts chat messages for a given trade
 
-frontend:
+frontend: DONE
 allows users to send messages
 shows all messages
 
