@@ -24,7 +24,7 @@ shows single trade
 backend: DONE
 api allows accepting/rejecting trade
 
-frontend:
+frontend: DONE
 api shows functionality to accept/reject
 
 4)
