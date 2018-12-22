@@ -1,4 +1,4 @@
-# TheMiddleman
+# TheMiddleman (Hackathon project)
 A Service for discovery/management of circular trading opportunities
 
 ## Idea
